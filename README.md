@@ -5,6 +5,14 @@
 ### Introduction
 The goal is to build a research problem extraction system.
 
+### Data Preprations
+1. considering only RP sentences in sentences.txt using info
+2. considering triples related to RP in triples directory
+3. consider stanza output only (ignore pdf files as well)
+4. consider RP in info_units only
+5. NEXT: build two type of data:
+    - list of all sentences in train/test with labels and preprocessings of removing short texts is not should be done here - text classification data
+    - geting research problems with considering only sentences and RPs - extractive text summarization data 
 
 ### Proposed Method
 - architecture
