@@ -1,4 +1,5 @@
 # NLPContributionGraph (NCG) Challenge
+https://github.com/ncg-task
 
 ### Idea
 
@@ -6,6 +7,9 @@
 The goal is to build a research problem extraction system.
 
 ### Data Preprations
+train: https://github.com/ncg-task/training-data
+test: https://github.com/ncg-task/test-data
+
 1. considering only RP sentences in sentences.txt using info
 2. considering triples related to RP in triples directory
 3. consider stanza output only (ignore pdf files as well)
@@ -13,6 +17,10 @@ The goal is to build a research problem extraction system.
 5. NEXT: build two type of data:
     - list of all sentences in train/test with labels and preprocessings of removing short texts is not should be done here - text classification data
     - geting research problems with considering only sentences and RPs - extractive text summarization data 
+
+check this befor doing preprations: 
+* https://github.com/ncg-task/sample-submission
+
 
 ### Proposed Method
 - architecture
@@ -34,6 +42,8 @@ The goal is to build a research problem extraction system.
 
 ### Evaluation
 
+* https://github.com/ncg-task/scoring-program
+
 - clf eval
 - ie eval
 - whole system eval
@@ -49,3 +59,8 @@ The goal is to build a research problem extraction system.
 - IE: summarization 
 
 ### Code Instructions
+
+
+### Resource
+
+* https://github.com/ncg-task/sample-submission
