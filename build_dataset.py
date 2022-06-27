@@ -8,7 +8,8 @@ from tqdm import tqdm
 import os
 import shutil
 import pandas as pd
-
+import matplotlib.pyplot as plt
+import numpy as np
 
 def mkdir(path):
     if not os.path.exists(path):
@@ -110,7 +111,27 @@ def create_tasks_data(task, input_dir):
             else:
                 ie_data.append([sample_dir_path, rp_list[:-1],rp_list[-1]['from sentence']])
     return clf_data, ie_data
-    pass
+
+def plots(data, title):
+    # ANN 2
+    freq_dict = {}
+    for item in data:
+        if item not in freq_dict:
+            freq_dict[item] = 1
+        else:
+            freq_dict[item] += 1
+
+    scores = list(freq_dict.keys())
+    values = list(freq_dict.values())
+    
+    fig = plt.figure(figsize = (10, 5))
+    
+    plt.bar(scores, values, color ='maroon', width = 0.5)
+    
+    plt.xlabel("index")
+    plt.ylabel("No. of indexes")
+    plt.title(title)
+    plt.show()
 
 
 if __name__ == '__main__':
@@ -143,12 +164,16 @@ if __name__ == '__main__':
     S_TRAIN_DF.to_csv(DATA_CONFIG.sent_clf_train_data_path, index=False)
     IE_TRAIN_DF = pd.DataFrame(IE_TRAIN_DATA, columns =['sample_dir_path', 'rps', 'sentence'])
     IE_TRAIN_DF.to_csv(DATA_CONFIG.ie_train_data_path, index=False)
+    print("Maximum number of index for sent clf task in train for label 1 is:", max(S_TRAIN_DF[S_TRAIN_DF['label'] == 1]['index'].tolist()))
+    plots(S_TRAIN_DF[S_TRAIN_DF['label'] == 1]['index'].tolist(), title="index distribution of label 1 in train")
 
     S_TEST_DF = pd.DataFrame(SENT_CLF_TEST_DATA,columns =['sample_dir_path', 'text', 'index', 'label'])
     S_TEST_DF.to_csv(DATA_CONFIG.sent_clf_test_data_path, index=False)
     IE_TEST_DF = pd.DataFrame(IE_TEST_DATA, columns =['sample_dir_path', 'rps', 'sentence'])
     IE_TEST_DF.to_csv(DATA_CONFIG.ie_test_data_path, index=False)
-
+    print("Maximum number of index for sent clf task in test for label 1 is:", max(S_TEST_DF[S_TEST_DF['label'] == 1]['index'].tolist()))
+    plots(S_TEST_DF[S_TEST_DF['label'] == 1]['index'].tolist(), title="index distribution of label 1 in test")
+    
 
     STATS = {
        "size of IE task in train": IE_TRAIN_DF.shape[0],
