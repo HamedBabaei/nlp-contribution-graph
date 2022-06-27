@@ -1,4 +1,6 @@
 # Byte-compiled / optimized / DLL files
+dataset/raw/training-data
+dataset/raw/test-data
 __pycache__/
 *.py[cod]
 *$py.class
