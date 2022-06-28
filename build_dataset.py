@@ -10,6 +10,7 @@ import shutil
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import sys 
 
 def mkdir(path):
     if not os.path.exists(path):
@@ -112,8 +113,7 @@ def create_tasks_data(task, input_dir):
                 ie_data.append([sample_dir_path, rp_list[:-1],rp_list[-1]['from sentence']])
     return clf_data, ie_data
 
-def plots(data, title):
-    # ANN 2
+def plots(data, title, path):
     freq_dict = {}
     for item in data:
         if item not in freq_dict:
@@ -132,10 +132,33 @@ def plots(data, title):
     plt.ylabel("No. of indexes")
     plt.title(title)
     plt.show()
+    fig.savefig(path)
 
+def plots_lens(data, title, path):
+    freq_dict = {}
+    for item in data:
+        if item not in freq_dict:
+            freq_dict[item] = 1
+        else:
+            freq_dict[item] += 1
+
+    scores = list(freq_dict.keys())
+    values = list(freq_dict.values())
+    
+    fig = plt.figure(figsize = (10, 5))
+    
+    plt.bar(scores, values, color ='maroon', width = 0.5)
+    
+    plt.xlabel("Lenghts")
+    plt.ylabel("No. of Lenghts")
+    plt.title(title)
+    plt.show()
+    fig.savefig(path)
 
 if __name__ == '__main__':
+    stdoutOrigin=sys.stdout 
     DATA_CONFIG = DataConfig().get_args()
+    sys.stdout = open(os.path.join(DATA_CONFIG.logs_dir, 'build_dataset.log.txt'), "w")
     SENT_CLF_TRAIN_DATA, IE_TRAIN_DATA = [], []
     SENT_CLF_TEST_DATA, IE_TEST_DATA = [], []
     print("* working on:", DATA_CONFIG.raw_train_dir)
@@ -161,31 +184,91 @@ if __name__ == '__main__':
     
 
     S_TRAIN_DF = pd.DataFrame(SENT_CLF_TRAIN_DATA, columns =['sample_dir_path', 'text', 'index', 'label'])
-    S_TRAIN_DF.to_csv(DATA_CONFIG.sent_clf_train_data_path, index=False)
     IE_TRAIN_DF = pd.DataFrame(IE_TRAIN_DATA, columns =['sample_dir_path', 'rps', 'sentence'])
-    IE_TRAIN_DF.to_csv(DATA_CONFIG.ie_train_data_path, index=False)
+
     print("Maximum number of index for sent clf task in train for label 1 is:", max(S_TRAIN_DF[S_TRAIN_DF['label'] == 1]['index'].tolist()))
-    plots(S_TRAIN_DF[S_TRAIN_DF['label'] == 1]['index'].tolist(), title="index distribution of label 1 in train")
+    plots(S_TRAIN_DF[S_TRAIN_DF['label'] == 1]['index'].tolist(), 
+         title="index distribution of label 1 in train", 
+         path=os.path.join(DATA_CONFIG.logs_dir, "images", "01-research problem-sentence index distributions-train set.jpg"))
 
     S_TEST_DF = pd.DataFrame(SENT_CLF_TEST_DATA,columns =['sample_dir_path', 'text', 'index', 'label'])
-    S_TEST_DF.to_csv(DATA_CONFIG.sent_clf_test_data_path, index=False)
     IE_TEST_DF = pd.DataFrame(IE_TEST_DATA, columns =['sample_dir_path', 'rps', 'sentence'])
-    IE_TEST_DF.to_csv(DATA_CONFIG.ie_test_data_path, index=False)
-    print("Maximum number of index for sent clf task in test for label 1 is:", max(S_TEST_DF[S_TEST_DF['label'] == 1]['index'].tolist()))
-    plots(S_TEST_DF[S_TEST_DF['label'] == 1]['index'].tolist(), title="index distribution of label 1 in test")
     
-
+    print("Maximum number of index for sent clf task in test for label 1 is:", max(S_TEST_DF[S_TEST_DF['label'] == 1]['index'].tolist()))
+    plots(S_TEST_DF[S_TEST_DF['label'] == 1]['index'].tolist(), 
+         title="index distribution of label 1 in test",
+         path=os.path.join(DATA_CONFIG.logs_dir, "images", "02-research problem-sentence index distributions-test set.jpg"))
+    
     STATS = {
        "size of IE task in train": IE_TRAIN_DF.shape[0],
        "size of IE task in test": IE_TEST_DF.shape[0],
+       "Maximum number of index for sent clf task in train for label 1 (index threshold)": max(S_TRAIN_DF[S_TRAIN_DF['label'] == 1]['index'].tolist()),
+       "Maximum number of index for sent clf task in test for label 1": max(S_TEST_DF[S_TEST_DF['label'] == 1]['index'].tolist()),
 
-       "size of SENT CLF task in train": S_TRAIN_DF.shape[0],
-       "size of SENT CLF task in test": S_TEST_DF.shape[0],
-       
-       "size of class 1 in SENT CLF task in train": sum(S_TRAIN_DF['label'].tolist()),
-       "size of class 0 in SENT CLF task in train": S_TRAIN_DF.shape[0] - sum(S_TRAIN_DF['label'].tolist()),
+       "SENT CLF stats before setting index threshold for index":{
+        "size of SENT CLF task in train": S_TRAIN_DF.shape[0],
+        "size of SENT CLF task in test": S_TEST_DF.shape[0],
+        
+        "size of class 1 in SENT CLF task in train": sum(S_TRAIN_DF['label'].tolist()),
+        "size of class 0 in SENT CLF task in train": S_TRAIN_DF.shape[0] - sum(S_TRAIN_DF['label'].tolist()),
 
-       "size of class 1 in SENT CLF task in test": sum(S_TEST_DF['label'].tolist()),
-       "size of class 0 in SENT CLF task in test": S_TEST_DF.shape[0] - sum(S_TEST_DF['label'].tolist())
+        "size of class 1 in SENT CLF task in test": sum(S_TEST_DF['label'].tolist()),
+        "size of class 0 in SENT CLF task in test": S_TEST_DF.shape[0] - sum(S_TEST_DF['label'].tolist())
+       }
     }
-    DataWriter.write_json(STATS, DATA_CONFIG.logs)
+
+    INDEX_THRESHODL = max(S_TRAIN_DF[S_TRAIN_DF['label'] == 1]['index'].tolist())
+    
+    S_TRAIN_DF = S_TRAIN_DF[S_TRAIN_DF['index'] <= INDEX_THRESHODL]
+    S_TEST_DF = S_TEST_DF[S_TEST_DF['index'] <= INDEX_THRESHODL]
+
+
+    STATS["SENT CLF stats after setting index threshold for index"] = {
+        "size of SENT CLF task in train": S_TRAIN_DF.shape[0],
+        "size of SENT CLF task in test": S_TEST_DF.shape[0],
+        
+        "size of class 1 in SENT CLF task in train": sum(S_TRAIN_DF['label'].tolist()),
+        "size of class 0 in SENT CLF task in train": S_TRAIN_DF.shape[0] - sum(S_TRAIN_DF['label'].tolist()),
+
+        "size of class 1 in SENT CLF task in test": sum(S_TEST_DF['label'].tolist()),
+        "size of class 0 in SENT CLF task in test": S_TEST_DF.shape[0] - sum(S_TEST_DF['label'].tolist())
+       }
+    
+    S_TRAIN_DF['text-len'] = [len(text.split()) for text in S_TRAIN_DF['text'].tolist()]
+    S_TEST_DF['text-len'] = [len(text.split()) for text in S_TEST_DF['text'].tolist()]
+
+    print("Minimum number of text len for sent clf task in train for label 1 is:", min(S_TRAIN_DF[S_TRAIN_DF['label'] == 1]['text-len'].tolist()))
+    plots_lens(S_TRAIN_DF[S_TRAIN_DF['label'] == 1]['text-len'].tolist(), 
+         title="text-len distribution of label 1 in train", 
+         path=os.path.join(DATA_CONFIG.logs_dir, "images", "03-research problem-sentence text-len distributions-train set.jpg"))
+
+    print("Minimum number of text len for sent clf task in test for label 1 is:", min(S_TEST_DF[S_TEST_DF['label'] == 1]['text-len'].tolist()))
+    plots_lens(S_TEST_DF[S_TEST_DF['label'] == 1]['text-len'].tolist(), 
+         title="text-len distribution of label 1 in test",
+         path=os.path.join(DATA_CONFIG.logs_dir, "images", "04-research problem-sentence text-len distributions-test set.jpg"))
+
+    STATS["Minimum number of text len for sent clf task in train for label 1 (text len threshold)"] = min(S_TRAIN_DF[S_TRAIN_DF['label'] == 1]['text-len'].tolist())
+    STATS["Minimum number of text len for sent clf task in test for label 1"] = min(S_TEST_DF[S_TEST_DF['label'] == 1]['text-len'].tolist())
+
+    TEXT_LEN_THRESHODL = min(S_TRAIN_DF[S_TRAIN_DF['label'] == 1]['text-len'].tolist())
+    
+    S_TRAIN_DF = S_TRAIN_DF[S_TRAIN_DF['text-len'] >= TEXT_LEN_THRESHODL]
+    S_TEST_DF = S_TEST_DF[S_TEST_DF['text-len'] >= TEXT_LEN_THRESHODL]
+
+    STATS["SENT CLF stats after setting text-len threshold for index"] = {
+        "size of SENT CLF task in train": S_TRAIN_DF.shape[0],
+        "size of SENT CLF task in test": S_TEST_DF.shape[0],
+        
+        "size of class 1 in SENT CLF task in train": sum(S_TRAIN_DF['label'].tolist()),
+        "size of class 0 in SENT CLF task in train": S_TRAIN_DF.shape[0] - sum(S_TRAIN_DF['label'].tolist()),
+
+        "size of class 1 in SENT CLF task in test": sum(S_TEST_DF['label'].tolist()),
+        "size of class 0 in SENT CLF task in test": S_TEST_DF.shape[0] - sum(S_TEST_DF['label'].tolist())
+       }
+    
+    IE_TRAIN_DF.to_csv(DATA_CONFIG.ie_train_data_path, index=False)
+    IE_TEST_DF.to_csv(DATA_CONFIG.ie_test_data_path, index=False)
+    S_TEST_DF.to_csv(DATA_CONFIG.sent_clf_test_data_path, index=False)
+    S_TRAIN_DF.to_csv(DATA_CONFIG.sent_clf_train_data_path, index=False)
+    DataWriter.write_json(STATS, os.path.join(DATA_CONFIG.logs_dir, 'data.stats.json'))
+    sys.stdout.close()
