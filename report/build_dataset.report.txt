@@ -1,0 +1,192 @@
+* working on: dataset/raw/training-data
+------------------------------------------------------------ working on train task: passage_re-ranking -------------------------------------------------------------
+========================================
+SIZE OF NEWE DATASET SENTENCES IS NOT EQUAL TO RPs: IN FOLLOWING DATA
+sentencs outputs index(new)      : [2, 5, 17]
+sample input dir(old data path   : dataset/raw/training-data/passage_re-ranking/1
+sentencs input index (old)       : [66, 35, 46, 47, 48, 16, 5, 17, 70, 63, 43, 2]
+len of research-problem          : 2
+research problems (new)          : ['PASSAGE RE - RANKING WITH BERT', 'In this paper , we describe a simple re-implementation of BERT for query - based passage re-ranking .']
+UI research problem              : {'has research problem': [['PASSAGE RE - RANKING', {'from sentence': 'PASSAGE RE - RANKING WITH BERT'}], ['query - based passage re-ranking', {'from sentence': 'In this paper , we describe a simple re-implementation of BERT for query - based passage re-ranking .'}]]}
+========================================
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: temporal_information_extraction -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: part-of-speech_tagging -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: prosody_prediction -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: text_generation -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: sentence_compression -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: relation_extraction -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: sentence_classification -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: question_similarity -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: question_generation -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: sarcasm_detection -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: semantic_parsing -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: negation_scope_resolution -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: question_answering -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: semantic_role_labeling -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: paraphrase_generation -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: query_wellformedness -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: sentiment_analysis -------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/training-data/sentiment_analysis/14
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: text-to-speech_synthesis -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: phrase_grounding -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: natural_language_inference -------------------------------------------------------------
+========================================
+SIZE OF NEWE DATASET SENTENCES IS NOT EQUAL TO RPs: IN FOLLOWING DATA
+sentencs outputs index(new)      : [2, 5, 42]
+sample input dir(old data path   : dataset/raw/training-data/natural_language_inference/56
+sentencs input index (old)       : [25, 26, 27, 28, 172, 140, 173, 162, 141, 153, 176, 145, 104, 159, 5, 90, 81, 108, 109, 30, 31, 42, 29, 2]
+len of research-problem          : 2
+research problems (new)          : ['Recurrent Relational Networks', 'We introduce the recurrent relational network , a general purpose module that operates on a graph representation of objects .']
+UI research problem              : {'has research problem': [['Recurrent Relational Networks', {'from sentence': 'Recurrent Relational Networks'}], ['recurrent relational network', {'from sentence': 'We introduce the recurrent relational network , a general purpose module that operates on a graph representation of objects .'}]]}
+========================================
+========================================
+SIZE OF NEWE DATASET SENTENCES IS NOT EQUAL TO RPs: IN FOLLOWING DATA
+sentencs outputs index(new)      : [2, 4, 14, 24, 28]
+sample input dir(old data path   : dataset/raw/training-data/natural_language_inference/94
+sentencs input index (old)       : [24, 14, 37, 27, 39, 28, 232, 2, 4, 224, 225, 214, 215, 216, 217, 40]
+len of research-problem          : 4
+research problems (new)          : ['Commonsense for Generative Multi - Hop Question Answering Tasks', 'Reading comprehension QA tasks have seen a recent surge in popularity , yet most works have focused on fact - finding extractive QA .', 'In this paper , we explore the task of machine reading comprehension ( MRC ) based QA .', 'Much progress has been made in reasoning - based MRC - QA on the bAbI dataset , which contains questions that require the combination of multiple disjoint pieces of evidence in the context .']
+UI research problem              : {'has research problem': [['Generative Multi - Hop Question Answering', {'from sentence': 'Commonsense for Generative Multi - Hop Question Answering Tasks'}], ['Reading comprehension QA', {'from sentence': 'Reading comprehension QA tasks have seen a recent surge in popularity , yet most works have focused on fact - finding extractive QA .'}], ['machine reading comprehension ( MRC ) based QA', {'from sentence': 'In this paper , we explore the task of machine reading comprehension ( MRC ) based QA .'}], ['reasoning - based MRC - QA', {'from sentence': 'Much progress has been made in reasoning - based MRC - QA on the bAbI dataset , which contains questions that require the combination of multiple disjoint pieces of evidence in the context .'}]]}
+========================================
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/training-data/natural_language_inference/50
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/training-data/natural_language_inference/45
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: topic_models -------------------------------------------------------------
+========================================
+SIZE OF NEWE DATASET SENTENCES IS NOT EQUAL TO RPs: IN FOLLOWING DATA
+sentencs outputs index(new)      : [2, 8, 18, 24]
+sample input dir(old data path   : dataset/raw/training-data/topic_models/0
+sentencs input index (old)       : [24, 38, 39, 18, 293, 370, 285, 274, 362, 299, 2, 376, 377, 367, 306, 307, 40, 41, 8]
+len of research-problem          : 3
+research problems (new)          : ['Learning document embeddings along with their uncertainties', 'We also present a generative Gaussian linear classifier for topic identification that exploits the uncertainty in document embeddings .', 'L EARNING word and document embeddings have proven to be useful in wide range of information retrieval , speech and natural language processing applications -.']
+UI research problem              : {'has research problem': [['Learning document embeddings', {'from sentence': 'Learning document embeddings along with their uncertainties'}], ['topic identification', {'from sentence': 'We also present a generative Gaussian linear classifier for topic identification that exploits the uncertainty in document embeddings .'}], ['L EARNING word and document embeddings', {'from sentence': 'L EARNING word and document embeddings have proven to be useful in wide range of information retrieval , speech and natural language processing applications -.'}]]}
+========================================
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: text_summarization -------------------------------------------------------------
+========================================
+SIZE OF NEWE DATASET SENTENCES IS NOT EQUAL TO RPs: IN FOLLOWING DATA
+sentencs outputs index(new)      : [2, 11, 39]
+sample input dir(old data path   : dataset/raw/training-data/text_summarization/6
+sentencs input index (old)       : [26, 27, 29, 192, 193, 194, 196, 197, 230, 198, 231, 210, 211, 212, 213, 214, 215, 216, 217, 218, 30, 31, 39, 200, 2, 201, 202, 204, 205, 207, 229, 209, 11]
+len of research-problem          : 2
+research problems (new)          : ['Deep Recurrent Generative Decoder for Abstractive Text Summarization', 'Automatic summarization is the process of automatically generating a summary that retains the most important content of the original text document .']
+UI research problem              : {'has research problem': [['Abstractive Text Summarization', {'from sentence': 'Deep Recurrent Generative Decoder for Abstractive Text Summarization'}], ['Automatic summarization', {'from sentence': 'Automatic summarization is the process of automatically generating a summary that retains the most important content of the original text document .'}]]}
+========================================
+******************************  create_tasks_data  ******************************
+------------------------------------------------------------ working on train task: smile_recognition -------------------------------------------------------------
+******************************  create_tasks_data  ******************************
+SIZE OF SENTS: 55438
+* working on: dataset/raw/test-data
+------------------------------------------------------------ working on test task: hypernym_discovery -------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/hypernym_discovery/7
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/hypernym_discovery/5
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/hypernym_discovery/8
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/hypernym_discovery/6
+**************************************************  create_tasks_data  **************************************************
+------------------------------------------------------------ working on test task: constituency_parsing -------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/constituency_parsing/3
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/constituency_parsing/8
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/constituency_parsing/0
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/constituency_parsing/2
+**************************************************  create_tasks_data  **************************************************
+------------------------------------------------------------ working on test task: document_classification -------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/3
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/16
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/10
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/9
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/19
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/18
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/8
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/6
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/11
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/17
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/12
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/2
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/4
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/13
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/document_classification/20
+**************************************************  create_tasks_data  **************************************************
+------------------------------------------------------------ working on test task: face_alignment -------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/face_alignment/16
+========================================
+SIZE OF NEWE DATASET SENTENCES IS NOT EQUAL TO RPs: IN FOLLOWING DATA
+sentencs outputs index(new)      : [2, 9, 23, 31]
+sample input dir(old data path   : dataset/raw/test-data/face_alignment/8
+sentencs input index (old)       : [45, 23, 47, 49, 270, 210, 211, 255, 239, 51, 31, 240, 265, 2, 267, 245, 268, 246, 247, 205, 227, 249, 206, 9, 209, 41]
+len of research-problem          : 3
+research problems (new)          : ['Joint 3D Face Reconstruction and Dense Face Alignment from A Single Image with 2D - Assisted Self - Supervised Learning', '3 D face reconstruction from a single 2D image is a challenging problem with broad applications .', '3 D face reconstruction is an important task in the field of computer vision and graphics .']
+UI research problem              : {'has research problem': [['Joint 3D Face Reconstruction and Dense Face Alignment from A Single Image', {'from sentence': 'Joint 3D Face Reconstruction and Dense Face Alignment from A Single Image with 2D - Assisted Self - Supervised Learning'}], ['3 D face reconstruction from a single 2D image', {'from sentence': '3 D face reconstruction from a single 2D image is a challenging problem with broad applications .'}], ['3 D face reconstruction', {'from sentence': '3 D face reconstruction is an important task in the field of computer vision and graphics .'}]]}
+========================================
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/face_alignment/17
+========================================
+SIZE OF NEWE DATASET SENTENCES IS NOT EQUAL TO RPs: IN FOLLOWING DATA
+sentencs outputs index(new)      : [2, 4, 83]
+sample input dir(old data path   : dataset/raw/test-data/face_alignment/12
+sentencs input index (old)       : [44, 250, 254, 238, 239, 218, 219, 38, 240, 220, 221, 2, 4, 203, 225, 248, 204, 205, 228, 229, 83, 41, 42, 43]
+len of research-problem          : 2
+research problems (new)          : ['Dense Face Alignment', 'Face alignment is a classic problem in the computer vision field .']
+UI research problem              : {'has research problem': [['Dense Face Alignment', {'from sentence': 'Dense Face Alignment'}], ['Face alignment', {'from sentence': 'Face alignment is a classic problem in the computer vision field .'}]]}
+========================================
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/face_alignment/13
+**************************************************  create_tasks_data  **************************************************
+------------------------------------------------------------ working on test task: data-to-text_generation -------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/data-to-text_generation/4
+**************************************************  create_tasks_data  **************************************************
+------------------------------------------------------------ working on test task: dependency_parsing -------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/dependency_parsing/3
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/dependency_parsing/1
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/dependency_parsing/6
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/dependency_parsing/2
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/dependency_parsing/4
+**************************************************  create_tasks_data  **************************************************
+------------------------------------------------------------ working on test task: entity_linking -------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/entity_linking/8
+========================================
+SIZE OF NEWE DATASET SENTENCES IS NOT EQUAL TO RPs: IN FOLLOWING DATA
+sentencs outputs index(new)      : [2, 4, 5, 65]
+sample input dir(old data path   : dataset/raw/test-data/entity_linking/12
+sentencs input index (old)       : [195, 196, 197, 230, 252, 198, 231, 210, 199, 212, 234, 256, 213, 257, 215, 216, 217, 219, 30, 31, 32, 242, 221, 200, 2, 201, 202, 4, 5, 225, 65]
+len of research-problem          : 3
+research problems (new)          : ['Incorporating Glosses into Neural Word Sense Disambiguation', 'Word Sense Disambiguation ( WSD ) aims to identify the correct meaning of polysemous words in the particular context .', 'Lexical resources like WordNet which are proved to be of great help for WSD in the knowledge - based methods .']
+UI research problem              : {'has research problem': [['Neural Word Sense Disambiguation', {'from sentence': 'Incorporating Glosses into Neural Word Sense Disambiguation'}], ['Word Sense Disambiguation ( WSD )', {'from sentence': 'Word Sense Disambiguation ( WSD ) aims to identify the correct meaning of polysemous words in the particular context .'}], ['WSD', {'from sentence': 'Lexical resources like WordNet which are proved to be of great help for WSD in the knowledge - based methods .'}]]}
+========================================
+**************************************************  create_tasks_data  **************************************************
+------------------------------------------------------------ working on test task: coreference_resolution -------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/coreference_resolution/7
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/coreference_resolution/3
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/coreference_resolution/9
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/coreference_resolution/1
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/coreference_resolution/0
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/coreference_resolution/2
+**************************************************  create_tasks_data  **************************************************
+------------------------------------------------------------ working on test task: face_detection -------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/face_detection/17
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/face_detection/0
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/face_detection/4
+**************************************************  create_tasks_data  **************************************************
+>>>>>>>>>>>>> HIGHER NUMBER OF RPS ENTITY: 4   for dir: dataset/preprocessed/test-data/face_detection/16
+------------------------------------------------------------ working on test task: natural_language_inference -------------------------------------------------------------
+>>>>>>>>>>>>>>>>>>>>>>>ISSUE WITH DATA FORMAT IN FILE: dataset/raw/test-data/natural_language_inference/14
+**************************************************  create_tasks_data  **************************************************
+Maximum number of index for sent clf task in train for label 1 is: 49
+Maximum number of index for sent clf task in test for label 1 is: 83

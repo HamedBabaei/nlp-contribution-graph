@@ -1,0 +1,32 @@
+{
+    "size of IE task in train": 602,
+    "size of IE task in test": 313,
+    "Maximum number of index for sent clf task in train for label 1 (index threshold)": 49,
+    "Maximum number of index for sent clf task in test for label 1": 83,
+    "SENT CLF stats before setting index threshold for index": {
+        "size of SENT CLF task in train": 55438,
+        "size of SENT CLF task in test": 33955,
+        "size of class 1 in SENT CLF task in train": 607,
+        "size of class 0 in SENT CLF task in train": 54831,
+        "size of class 1 in SENT CLF task in test": 316,
+        "size of class 0 in SENT CLF task in test": 33639
+    },
+    "SENT CLF stats after setting index threshold for index": {
+        "size of SENT CLF task in train": 11613,
+        "size of SENT CLF task in test": 7595,
+        "size of class 1 in SENT CLF task in train": 607,
+        "size of class 0 in SENT CLF task in train": 11006,
+        "size of class 1 in SENT CLF task in test": 314,
+        "size of class 0 in SENT CLF task in test": 7281
+    },
+    "Minimum number of text len for sent clf task in train for label 1 (text len threshold)": 3,
+    "Minimum number of text len for sent clf task in test for label 1": 3,
+    "SENT CLF stats after setting text-len threshold for index": {
+        "size of SENT CLF task in train": 10423,
+        "size of SENT CLF task in test": 6815,
+        "size of class 1 in SENT CLF task in train": 607,
+        "size of class 0 in SENT CLF task in train": 9816,
+        "size of class 1 in SENT CLF task in test": 314,
+        "size of class 0 in SENT CLF task in test": 6501
+    }
+}
