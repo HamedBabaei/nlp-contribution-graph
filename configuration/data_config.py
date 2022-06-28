@@ -28,21 +28,24 @@ class DataConfig:
                                 help='Path to preprocessed test data')
         
         self.parser.add_argument("--sent_clf_train_data_path", type=str, 
-                                default="dataset/preprocessed/sent_clf_train_data.csv", 
+                                default="dataset/preprocessed/experiment-data/sent_clf_train_data.csv", 
                                 help='Path to preprocessed sentence classification train data')
         self.parser.add_argument("--sent_clf_test_data_path", type=str, 
-                                default="dataset/preprocessed/sent_clf_test_data.csv", 
+                                default="dataset/preprocessed/experiment-data/sent_clf_test_data.csv", 
                                 help='Path to preprocessed sentence classification test data')
-
         self.parser.add_argument("--ie_train_data_path", type=str, 
-                                default="dataset/preprocessed/ie_train_data.csv", 
+                                default="dataset/preprocessed/experiment-data/ie_train_data.csv", 
                                 help='Path to preprocessed information extraction train data')
         self.parser.add_argument("--ie_test_data_path", type=str, 
-                                default="dataset/preprocessed/ie_test_data.csv", 
+                                default="dataset/preprocessed/experiment-data/ie_test_data.csv", 
                                 help='Path to preprocessed information extraction test data')
 
-        self.parser.add_argument("--logs", type=str, default="report/data.stats.json", 
+        self.parser.add_argument("--text_lenght_th", type=int, default=3, 
+                                help='Lenght of texts to be considered for sentence classification')
+        self.parser.add_argument("--logs_dir", type=str, default="report/", 
                                 help='dataset (train and test) stats path')
+
+
         self.parser.add_argument("--seed", type=int, default=422, help='random seeds')
         self.parser.add_argument("-f")
 
