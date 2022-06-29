@@ -3,6 +3,7 @@ from datahandler import DataReader
 from src import (RPSentenceDetector, 
                  SummarizerInference,
                  NLPContributionGraphEval)
+from transformers import pipeline
 import os
 import re
 
@@ -55,11 +56,17 @@ def make_predictions(input_dir_path, output_dir_path):
             save_research_problem_sentences(output_task_paper_dir_path, predict_sents_indexes)
 
 def get_classifier(config):
-    if config.modelname == 'clf:xgboost-ie:t5small':
+    if config.modelname == 'xgboost-t5small':
         # summarizer (t5-small) - classifier (tfidf+xgboost)
         from src import TFIDFXGBoost
         model_pkl = DataReader.load_pkl(config.tfidf_ml_clf_path)
         classification_model = TFIDFXGBoost(model=model_pkl)
+    if config.modelname == 'distilroberta-t5base':
+        from src import TrasformerClassfier
+        model = pipeline("text-classification", 
+                         model=config.transformer_clf_path, 
+                         tokenizer=config.transformer_clf_path)
+        classification_model = TrasformerClassfier(model=model)
     return classification_model
 
 

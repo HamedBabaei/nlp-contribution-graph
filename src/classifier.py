@@ -1,6 +1,5 @@
 import numpy as np
 
-
 class RPSentenceDetector:
 
     def __init__(self, model, text_index_th, text_lenght_th):
@@ -28,3 +27,13 @@ class TFIDFXGBoost:
 
     def predict(self, X):
         return self.model.predict(X)
+
+class TrasformerClassfier:
+    def __init__(self, model):
+        self.model = model
+
+    def predict(self, X):
+        prediction = []
+        for index in range(len(X)):
+            prediction.append(int(self.model(X[index])[0]['label'][-1]))
+        return prediction
