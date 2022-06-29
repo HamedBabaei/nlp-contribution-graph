@@ -52,13 +52,14 @@ https://huggingface.co/docs/transformers/tasks/sequence_classification
 
 <table style='text-align:center;'>
   <tr>
-    <td> </td>
-    <td colspan="3">Sentences</td>
-    <td colspan="3">Information Units</td>
-    <td colspan="3">Triples</td>
+    <td> <i>Models</i> </td>
+    <td colspan="3"><i>Sentences</i></td>
+    <td colspan="3"><i>Information Units</i></td>
+    <td colspan="3"><i>Triples</i></td>
+    <td colspan="1"><i>Average</i></td>
   </tr>
   <tr>
-    <td> </td>
+    <td><i> Metrics </i></td>
     <td colspan="1">F1</td>
     <td colspan="1">P</td>
     <td colspan="1">R</td>
@@ -68,18 +69,19 @@ https://huggingface.co/docs/transformers/tasks/sequence_classification
     <td colspan="1">F1</td>
     <td colspan="1">P</td>
     <td colspan="1">R</td>
+    <td colspan="1">F1</td>
   </tr>
     <td>xgboost-t5small</td>
-    <td colspan="1">F1</td>
-    <td colspan="1">P</td>
-    <td colspan="1">R</td>
-    <td colspan="1">F1</td>
-    <td colspan="1">P</td>
-    <td colspan="1">R</td>
-    <td colspan="1">F1</td>
-    <td colspan="1">P</td>
-    <td colspan="1">R</td>
-
+    <td colspan="1">0.281</td>
+    <td colspan="1">0.604</td>
+    <td colspan="1">0.183</td>
+    <td colspan="1">0.609</td>
+    <td colspan="1">1.0</td>
+    <td colspan="1">0.438</td>
+    <td colspan="1">0.173</td>
+    <td colspan="1">0.385</td>
+    <td colspan="1">0.112</td>
+    <td colspan="1">0.355</td>
 </table>
 
 
