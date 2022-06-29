@@ -1,9 +1,16 @@
 # Byte-compiled / optimized / DLL files
 dataset/raw/training-data
 dataset/raw/test-data
-assets/t5-small
-assets/t5-base
-dataset/outputs
+assets/clf-t5-small
+assets/clf-t5-base
+assets/sum-t5-small
+assets/sum-t5-base
+outputs/clf:xgboost-ie:t5small/train
+outputs/clf:xgboost-ie:t5small/test
+outputs/clf:t5small-ie:t5small/train
+outputs/clf:t5small-ie:t5small/test
+outputs/clf:t5large-ie:t5large/train
+outputs/clf:t5large-ie:t5large/test
 
 __pycache__/
 *.py[cod]
