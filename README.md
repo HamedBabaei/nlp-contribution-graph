@@ -85,7 +85,7 @@ https://huggingface.co/docs/transformers/tasks/sequence_classification
     <td colspan="1">0.355</td>
   </tr>
   <tr>
-  <td><i> distilroberta-t5base </i></td>
+  <td>distilroberta-t5base</td>
     <td colspan="1">0.524</td>
     <td colspan="1">0.568</td>
     <td colspan="1">0.487</td>
