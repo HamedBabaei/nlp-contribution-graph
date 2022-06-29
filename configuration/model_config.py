@@ -17,10 +17,10 @@ class ModelConfig:
                                 default="assets/tfidf_ml_clf.sav", 
                                 help='Path to trained tfidf+ml classifier for sentence classifiation')
         self.parser.add_argument("--summarizer_model_path", type=str, 
-                                default="assets/t5-small", 
+                                default="assets/t5-small/", 
                                 help='Path to fine-tuned T5 summarizer')
         self.parser.add_argument("--output_dir", type=str, 
-                                default="dataset/outputs/t5-tfidf-xgboost", 
+                                default="dataset/outputs/summarizer (t5-small) - classifier (tfidf+xgboost)", 
                                 help='Path to output directory to save outputs')
         self.parser.add_argument("--text_index_th", type=int, default=50, 
                                 help='index threshold')
