@@ -71,6 +71,7 @@ https://huggingface.co/docs/transformers/tasks/sequence_classification
     <td colspan="1">R</td>
     <td colspan="1">F1</td>
   </tr>
+  <tr>
     <td>xgboost-t5small</td>
     <td colspan="1">0.281</td>
     <td colspan="1">0.604</td>
@@ -82,6 +83,20 @@ https://huggingface.co/docs/transformers/tasks/sequence_classification
     <td colspan="1">0.385</td>
     <td colspan="1">0.112</td>
     <td colspan="1">0.355</td>
+  </tr>
+  <tr>
+  <td><i> distilroberta-t5base </i></td>
+    <td colspan="1">0.524</td>
+    <td colspan="1">0.568</td>
+    <td colspan="1">0.487</td>
+    <td colspan="1">0.941</td>
+    <td colspan="1">1.0</td>
+    <td colspan="1">0.890</td>
+    <td colspan="1">0.326</td>
+    <td colspan="1">0.362</td>
+    <td colspan="1">0.297</td>
+    <td colspan="1">0.597</td>
+  </tr>
 </table>
 
 
