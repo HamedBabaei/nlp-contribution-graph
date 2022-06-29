@@ -17,8 +17,8 @@ class RPSentenceDetector:
                 clean_setns.append(sentence[0])
                 clean_setns_indexs.append(sentence[2])
         
-        predictions = np.array(self.model.predict_proba(clean_setns))#.astype(bool))
-        print(predictions)
+        predictions = np.array(self.model.predict(clean_setns)).astype(bool)
         predict_sent_indexes = list(np.array(clean_setns_indexs)[predictions])
-        predict_sents = list(np.array(clean_setns)[predictions])
+        predict_sents = list(set(list(np.array(clean_setns)[predictions])))
         return predict_sent_indexes, predict_sents
+        
