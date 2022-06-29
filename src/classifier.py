@@ -21,4 +21,10 @@ class RPSentenceDetector:
         predict_sent_indexes = list(np.array(clean_setns_indexs)[predictions])
         predict_sents = list(set(list(np.array(clean_setns)[predictions])))
         return predict_sent_indexes, predict_sents
-        
+
+class TFIDFXGBoost:
+    def __init__(self, model):
+        self.model = model
+
+    def predict(self, X):
+        return self.model.predict(X)
