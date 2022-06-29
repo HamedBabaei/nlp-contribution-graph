@@ -16,8 +16,11 @@ class ModelConfig:
         self.parser.add_argument("--tfidf_ml_clf_path", type=str, 
                                 default="assets/tfidf_ml_clf.sav", 
                                 help='Path to trained tfidf+ml classifier for sentence classifiation')
+        self.parser.add_argument("--transformer_clf_path", type=str, 
+                                default="assets/clf-distilroberta", 
+                                help='Path to trained tfidf+ml classifier for sentence classifiation')
         self.parser.add_argument("--summarizer_model_path", type=str, 
-                                default="assets/sum-t5-small/", 
+                                default="assets/sum-t5-base/", 
                                 help='Path to fine-tuned T5 summarizer')
         self.parser.add_argument("--output_dir", type=str, 
                                 default="outputs", 
@@ -26,9 +29,9 @@ class ModelConfig:
                                 help='index threshold')
         self.parser.add_argument("--text_lenght_th", type=int, default=3, 
                                 help='text lenght threshold')
-        self.parser.add_argument("--modelname", type=str, default="clf:xgboost-ie:t5small", 
+        self.parser.add_argument("--modelname", type=str, default="distilroberta-t5base", 
                                 help='name of classifier for sentence classifications and output dir'\
-                                    '[clf:xgboost-ie:t5small, clf:t5small-ie:t5small, clf:t5large-ie:t5large]')
+                                    '[xgboost-t5small, distilroberta-t5base]')
         
         self.parser.add_argument("--seed", type=int, default=422, help='random seeds')
         self.parser.add_argument("-f")
