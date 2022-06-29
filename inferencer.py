@@ -1,6 +1,6 @@
 from configuration import ModelConfig, DataConfig
 from datahandler import DataReader
-from models import RPSentenceDetector, SummarizerInference
+from src import RPSentenceDetector, SummarizerInference
 import os
 import re
 
