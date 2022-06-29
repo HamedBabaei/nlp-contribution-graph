@@ -30,7 +30,7 @@ check this befor doing preprations:
         - baseline (tfidf + lr)
     - information extraction
         - sentences as RP
-        
+https://huggingface.co/docs/transformers/tasks/sequence_classification
 
 ### Setups
 
@@ -47,6 +47,42 @@ check this befor doing preprations:
 - clf eval
 - ie eval
 - whole system eval
+
+
+
+<table style='text-align:center;'>
+  <tr>
+    <td> </td>
+    <td colspan="3">Sentences</td>
+    <td colspan="3">Information Units</td>
+    <td colspan="3">Triples</td>
+  </tr>
+  <tr>
+    <td> </td>
+    <td colspan="1">F1</td>
+    <td colspan="1">P</td>
+    <td colspan="1">R</td>
+    <td colspan="1">F1</td>
+    <td colspan="1">P</td>
+    <td colspan="1">R</td>
+    <td colspan="1">F1</td>
+    <td colspan="1">P</td>
+    <td colspan="1">R</td>
+  </tr>
+    <td>xgboost-t5small</td>
+    <td colspan="1">F1</td>
+    <td colspan="1">P</td>
+    <td colspan="1">R</td>
+    <td colspan="1">F1</td>
+    <td colspan="1">P</td>
+    <td colspan="1">R</td>
+    <td colspan="1">F1</td>
+    <td colspan="1">P</td>
+    <td colspan="1">R</td>
+
+</table>
+
+
 
 ### Future works
 - Using title, abstract, and introductions only
