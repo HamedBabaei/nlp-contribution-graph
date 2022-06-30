@@ -21,16 +21,16 @@ The proposed method to the task is two-fold: (1) a research problem classifier t
 
 The orignal dataset which presented in [NCG task training-data](https://github.com/ncg-task/training-data) and [NCG task test-data](https://github.com/ncg-task/test-data) converted into the following format. The transformed data exist in `dataset/preprocessed` directory. 
 ```
-[task-name-folder]/                                # natural_language_inference, ....
-    ├── [article-counter-folder]/                  # ranges between 0 to 100 since we annotated varying numbers of articles per task
-    │   ├── [articlename]-Stanza-out.txt           # plaintext preprocessed output from [Stanza](https://github.com/stanfordnlp/stanza)
-    │   ├── sentences.txt                          # annotated research problem contribution sentences in the file
-    │   └── info-units/                            # the folder containing information units in JSON format 
-    │   │   └── research-problem.json              # `research problem` mandatory information unit in json format
-    │   └── triples/                               # the folder containing information unit triples one per line
-    │   │   └── research-problem.txt               # `research problem` triples (one research problem statement per line)
-    │   └── ...                                    # there are more articles annotated for each task, so this will be repeated
-    └── ...                                        # there are more tasks selected overall, so this repeats more times
+[task-name-folder]/                               
+    ├── [article-counter-folder]/                 
+    │   ├── [articlename]-Stanza-out.txt          
+    │   ├── sentences.txt                         
+    │   └── info-units/                           
+    │   │   └── research-problem.json             
+    │   └── triples/                              
+    │   │   └── research-problem.txt              
+    │   └── ...                                   
+    └── ...
 ```
 Next, to train models, we list all sentences in the train/test for research problem classifier. Next, we used `info-units/research-problem.json` file to build summarization data, where the phrases are the summary and the sentences are input texts to summarization service. During data preprations we runned a preprocessings to avoid any complex modelings in future. So the data which construcuted for both tasks are preprocessed (which the preprocessin has been described in section 3 - proposed method). The stats of the research problem classifier and research problem phrase extractions are as follows:
 
@@ -68,7 +68,7 @@ Next, to train models, we list all sentences in the train/test for research prob
 </table>
   
 
-
+**Note**: `build_dataset.py` scripts is doing whole the dataset preprations.
 
 
 ## 3. Proposed Method
