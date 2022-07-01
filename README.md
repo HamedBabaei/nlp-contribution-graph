@@ -32,8 +32,9 @@ The orignal dataset which presented in [NCG task training-data](https://github.c
     │   └── ...                                   
     └── ...
 ```
-Next, to train models, we list all sentences in the train/test for research problem classifier. Next, we used `info-units/research-problem.json` file to build summarization data, where the phrases are the summary and the sentences are input texts to summarization service. During data preprations we runned a preprocessings to avoid any complex modelings in future. So the data which construcuted for both tasks are preprocessed (which the preprocessin has been described in section 3 - proposed method). The stats of the research problem classifier and research problem phrase extractions are as follows:
+Next, to train models, we list all sentences in the train/test for research problem classifier. Next, we used `info-units/research-problem.json` file to build summarization data, where the phrases are the summary and the sentences are input texts to summarization service. These datasets are exist in `dataset/preprocessed/experiment-data` directory. The stats of the research problem classifier and research problem phrase extractions are as follows:
 
+<!-- During data preprations we runned a preprocessings to avoid any complex modelings in future. So the data which construcuted for both tasks are preprocessed (which the preprocessin has been described in section 3 - proposed method).  -->
 
 <table style='text-align:center;'>
   <tr>
@@ -51,14 +52,22 @@ Next, to train models, we list all sentences in the train/test for research prob
     <td colspan="1"> All-data </td>    
   </tr>
   <tr>
-    <td>Research Problem Classifier</td>
+  <td>Research Problem Classifier</td>
+    <td colspan="1"> 607 </td>
+    <td colspan="1"> 54831 </td>
+    <td colspan="1"> 55438 </td>
+    <td colspan="1"> 316 </td>
+    <td colspan="1"> 33639 </td>
+    <td colspan="1"> 33955 </td>
+  </tr>
+  <tr>
+    <td>Research Problem Classifier (preprocessed)</td>
     <td colspan="1"> 607 </td>
     <td colspan="1"> 9816 </td>
     <td colspan="1"> 10423 </td>
     <td colspan="1"> 314 </td>
     <td colspan="1"> 6501 </td>
     <td colspan="1"> 6815 </td>
-
   </tr>
     <tr>
     <td>Research Problem Summarization</td>
@@ -66,20 +75,44 @@ Next, to train models, we list all sentences in the train/test for research prob
     <td colspan="3"> 314 </td>
   </tr>
 </table>
-  
 
-**Note**: `build_dataset.py` scripts is doing whole the dataset preprations.
+<b style='text-align:center;'>Table 1: Statistics of the dataset</b>
+
+**Note**: `build_dataset.py` scripts is doing whole the dataset preprations with proposed method preprocessings.
 
 
-## 3. Proposed Method
-- architecture
-- architecture steps
-    - preprocessings (remove short texts)
-    - classifiers
-        - baseline (tfidf + lr)
-    - information extraction
-        - sentences as RP
-https://huggingface.co/docs/transformers/tasks/sequence_classification
+## 3. Proposed System
+
+The Figure-1 presents the proposed system architectures. After the data preprations, each task (sentence classification and text summarization) builds own data. For sentence classification task we made preprocessing which ended up of decreasing unwanted samples (stats presented in table-1) for fine-tuning transformer model for research problem sentence detection. For text summarization we fine-tuned T5 to summary research problem sentences.
+
+![NLPContributionGraph](images/NLPContributionGraph-Architecture.jpg)
+
+<b style='text-align:center;'>Figure 1: Proposed System Architecture</b>
+
+The preprocessing step and models described in the followings
+
+#### 3.1 Preprocessing
+
+The number of samples were too high for research problem classification part of the proposed system. To reduce the size of dataset we applied two thresholds over data based on hyperparameter tuning over train set.
+
+**1) Maximum Index Threshold**: According to [J. D’Souza and S. Auer](http://ceur-ws.org/Vol-2658/paper2.pdf) effort in designing NCG dataset, most of the research problems come from title, abstract and introduction part of the paper. However, due to the variant in structure of papers it is hard to seprate these sections.
+
+We made an analysis of the research problem indexes distributions to find appropiate number of samples from each documents to be considered for research problem classification. Here index is the no. of sentence that appeared in the paper to be research problem. 
+
+The Figure-2 shows the distribution of research problem indexes in train and test set. To avoid any bias we select $I_{th} = 50$ where it is the maximum index threshold based on train set. Analysis of test set showed that we only losing 2 samples in train if we set threshold $I_{th} = 5$ however we reduce a significant amount of unwanted samples for training classifiers.
+
+![PreprocessingDist](images/distributions.png)
+<b style='text-align:center;'>Figure 2: Distributions of research problem indexes and lenghts </b>
+
+**2) Minimum Text Lenght Threshold**: Most of papers consist of sentences with a single word or multple words that in a few cases research problems are in group that higher than a specific words. To confirm the observations we plot the lenght of research problemts in train set. And according to these observations we used $T_{th} =  3$ as text lenght threshold. 
+
+At the end, we obtained a very good shaped dataset for our classification task. The stats for the dataset is presented in `Table-1`. We reduced **train set by 82%** and **test set by 79%**. During the data reduction we only lost 2 samples in test set, however our models can be trained appropiately. The created datasets stored in `dataset/preprocessed/experiment-data` directory.
+
+
+#### 3.2 Research Problem Classifier
+
+#### 3.3 Research Problem Phrase Extraction
+
 
 ## 4. Results
 ### 4.1 Setups
@@ -171,11 +204,14 @@ https://huggingface.co/docs/transformers/tasks/sequence_classification
 
 ## Requirenments
 
+
+
+### References
+https://zenodo.org/record/1157185#.Yr4JZ9JBzeQ
+http://ceur-ws.org/Vol-2658/paper2.pdf
+
 1. https://ncg-task.github.io/
 2. https://github.com/ncg-task
 3. https://github.com/ncg-task/training-data
 4. https://github.com/ncg-task/test-data
 5. https://github.com/ncg-task/sample-submission
-
-
-### References
