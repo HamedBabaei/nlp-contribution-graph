@@ -10,7 +10,7 @@ Email : [hamedbabaeigiglou@gmail.com](hamedbabaeigiglou@gmail.com)
 
 In this work the major concern is `Research Problem` extraction. To do this, we need to find contribution sentences that contain `Research Problems` IU. Next, using the contribution sentences we may extract problems. To do this we designed a classifier that identifys contribution sentences with research problems (RPs), next a text summarizer to extracts RP phrases.
 
-The rest of sections are ognized as follows. In section 2, we discused dataset prepration procedure for this task. The proposed method is described in section 3. The experimental setup and analysis is presented in section 4. The section 5 presents the observations and code instructions. Finally, in section 7 we concluded the report with possible future works..
+The rest of sections are ognized as follows. In section 2, we discused dataset prepration procedure for this task. The proposed method is described in section 3. The experimental setup and analysis is presented in section 4. The section 5 presents the observations and code instructions. Finally, in section 6 we concluded the report with possible future works..
 
 
 ## 2. Dataset Preprations
@@ -162,7 +162,7 @@ For `research problem phrase extraction`, T5 models are quite appropiate choice 
     <td colspan="1">71.42</td>
   </tr>
 </table>
-<b style='text-align:center;'>Table 2: Experimental Evaluations</b>
+<b style='text-align:center;'>Table 2: ExpPassage_re-ranking/1` paper, first item of `info-units/erimental Evaluations</b>
 
 In conclution, we can see that `distilroberta-t5base` models is good regarding the simplest model. So introducing more complexity on this simple model may allow us to boost the current model performance.
 
@@ -236,18 +236,40 @@ We have used experimentations on the test set to conclude the `distilroberta-bas
 
 2. The `xgboost-t5small` model shows that TFIDF features are not quite well for this task. The possible reason behind this is the high word correlations between research-problem and other sentences. Which it leads to poor feature quality for research-problem class.
 
-3. 
+3. Summarization model is working well in development however, its results decreased during final evalution phase where only research problem sentences was considered for phrase extraction.  Here considering sentence detection F1 score of 52% the summarization achived 62.2% of the time (`32.6%/52.4% = 62.2%`) correct summarization. So increasing the accurcy of research problem sentence detection module effects the triple extraction modules. 
+
+4. The 59.7% averaged f1 score of system is mostly effected by IU score, since its been calculated regardless of how much is accurate the content, if a paper has the `research-problem.txt` triples it will be counted toward true positives in IU. Ignoring this metric and considering $(F1_{sents} + F1_{triples})/2$ the obtained averated f1 scores are **0.425** and **0.227** for `distilroberta-t5base` and `xgboost-t5small` models respectively. So, the proposed method boost the baseline models by **53%**.
+
+<!-- In experimental analysis which presented in table-2 summarization has 20% of error (considering rouge1 score) -->
 
 
 ## 5. Oservations && Code Instructions
 
-### 5.1 Observations
+#### 5.1 Observations
 1. Investigations showed that in few cases sentences with research-problem label repeated multiple times in papers, however these sentences didn't appear in the original contribution sentences. As an example, in `training-set/Passage_re-ranking/1` paper, first item of `info-units/resarch-problem.json` appeared once in title and one more time in the body of paper. But its sentence index appeared once in the `sentences.txt`
 2. For many of files in `info-units/research-problem.json` there is inconsistency in data structures which we solve this issue in building dataset by hard coding. As an example, in `training-set/natural-language-inference/`, papers `50`, `45`, and `14` have inconsistant data strcuture with other papers. This scenario repeated many times. For inconsistency, research-problems in these papers sould be inside of a list like others.
 3. In [scoring program](https://github.com/ncg-task/scoring-program) we saw that the evaluation is being done on two papers for each task only. we fix this by allowing the evaluation go through all the papers. The following line in code has been changed from ```for i in range(2):``` to ```for i in range(len(os.listdir(os.path.join(gold_dir, task)))):```
 
-### 5.2 Code Instructions
+#### 5.2 Code Instructions
 
+```
+[assets]/                      # Model artifacts directory
+[configuration]/             # Configs of model, data and evaluations
+[datahandler]/               # data loader/saver modules to load/save files
+[dataset]/                   # dataset directory consist of created data and experimental data
+[images]/                    # repository image directory
+[notebooks]/                 # experimental jupyter notebook of the project such as training text-summarization (section 3.2) and classifications (section 3.3)
+[outputs]/                   # output of the models and evaluation results
+[report]/                    # build dataset and dataset stats report dir
+[src]/                       # classifcation, evaluation, and summarizer script dir
+  ├── .gitignore
+  ├── README.md
+  ├── __init__.py
+  ├── build_dataset.py                 # building datasets that mentioned in section 2
+  ├── requirenments.txt                # requirenment of the project
+  ├── runner.py                        # the final inferencers that combines models and do the evaluations
+  └── train_sentence_classifier_bs.py  # xgboost model
+```
 <!-- 
 ## 6. Future works
 - Using title, abstract, and introductions only
@@ -260,7 +282,7 @@ We have used experimentations on the test set to conclude the `distilroberta-bas
 - IE: summarization  -->
 
 
-### Requirenments
+## Requirenments
 * Python3
 * Packages in requirenments.txt
 
