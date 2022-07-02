@@ -1,6 +1,5 @@
 # NLPContributionGraph (NCG) Challenge
-Author: Hamed Babaei Giglou
-Email : [hamedbabaeigiglou@gmail.com](hamedbabaeigiglou@gmail.com)
+
 
 ## 1. Introduction
 [NLPContributionGraph](https://ncg-task.github.io/) challenge aim is to struct scholarly NLP contributions in the open research knowledge graph (ORKG). It posited as a solution to the problem of keeping track of research progress. The dataset for this task is defined in specific structure to be integrable within KG infrastructures such as ORKG.  It consist of the following informations:
@@ -9,9 +8,6 @@ Email : [hamedbabaeigiglou@gmail.com](hamedbabaeigiglou@gmail.com)
 3. `Triples`: subject-predicate-object statements for KG constructions. The triples are orgnized under thre mandatory (*Research Problem, Approach, Model*) or more information units (IUs) (*Code, Dataset, Experimental Setup, Hyperparameters, Baselines, Results, Tasks, Experiments, and Ablation Analysis*).
 
 In this work the major concern is `Research Problem` extraction. To do this, we need to find contribution sentences that contain `Research Problems` IU. Next, using the contribution sentences we may extract problems. To do this we designed a classifier that identifys contribution sentences with research problems (RPs), next a text summarizer to extracts RP phrases.
-
-The rest of sections are ognized as follows. In section 2, we discused dataset prepration procedure for this task. The proposed method is described in section 3. The experimental setup and analysis is presented in section 4. The section 5 presents the observations and code instructions. Finally, in section 6 we concluded the report with possible future works..
-
 
 ## 2. Dataset Preprations
 The proposed method to the task is two-fold: (1) a research problem classifier to identify research problem sentences, (2) a text summarizer to extract research problem phrases. Also, we only interested in extracting research problems so the resest of the data such as phrases and triples related to other IU are not relevent to this task. To only consider metada that is needed in this task we considered the following changes:
@@ -253,7 +249,7 @@ We have used experimentations on the test set to conclude the `distilroberta-bas
 #### 5.2 Code Instructions
 
 ```
-[assets]/                      # Model artifacts directory
+[assets]/                    # Model artifacts directory
 [configuration]/             # Configs of model, data and evaluations
 [datahandler]/               # data loader/saver modules to load/save files
 [dataset]/                   # dataset directory consist of created data and experimental data
@@ -269,6 +265,16 @@ We have used experimentations on the test set to conclude the `distilroberta-bas
   ├── requirenments.txt                # requirenment of the project
   ├── runner.py                        # the final inferencers that combines models and do the evaluations
   └── train_sentence_classifier_bs.py  # xgboost model
+```
+
+1. Building dataset:
+```python
+python3 build_dataset.py
+```
+2. Train text-summarization and text-classification models using jupyter-notebooks in `notebooks` dir and save artifacts in `assets` dir with the name of `clf-distilroberta` and `sum-t5base`.
+3. Run the following script to produce outputs and evaluations on `outputs/distilroberta-t5base` directory
+```python
+python3 runner.py
 ```
 <!-- 
 ## 6. Future works
