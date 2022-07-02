@@ -1,5 +1,6 @@
 # NLPContributionGraph (NCG) Challenge
-
+Author: Hamed Babaei Giglou
+Email : [hamedbabaeigiglou@gmail.com](hamedbabaeigiglou@gmail.com)
 
 ## 1. Introduction
 [NLPContributionGraph](https://ncg-task.github.io/) challenge aim is to struct scholarly NLP contributions in the open research knowledge graph (ORKG). It posited as a solution to the problem of keeping track of research progress. The dataset for this task is defined in specific structure to be integrable within KG infrastructures such as ORKG.  It consist of the following informations:
@@ -33,9 +34,7 @@ The orignal dataset which presented in [NCG task training-data](https://github.c
     └── ...
 ```
 Next, to train models, we list all sentences in the train/test for research problem classifier. Next, we used `info-units/research-problem.json` file to build summarization data, where the phrases are the summary and the sentences are input texts to summarization service. These datasets are exist in `dataset/preprocessed/experiment-data` directory. The stats of the research problem classifier and research problem phrase extractions are as follows:
-
 <!-- During data preprations we runned a preprocessings to avoid any complex modelings in future. So the data which construcuted for both tasks are preprocessed (which the preprocessin has been described in section 3 - proposed method).  -->
-
 <table style='text-align:center;'>
   <tr>
     <td> <b>Tasks\Datasets</b> </td>
@@ -95,7 +94,7 @@ The preprocessing step and models described in the followings
 
 The number of samples were too high for research problem classification part of the proposed system. To reduce the size of dataset we applied two thresholds over data based on hyperparameter tuning over train set.
 
-**1) Maximum Index Threshold**: According to [J. D’Souza and S. Auer](http://ceur-ws.org/Vol-2658/paper2.pdf) effort in designing NCG dataset, most of the research problems come from title, abstract and introduction part of the paper. However, due to the variant in structure of papers it is hard to seprate these sections.
+**1) Maximum Index Threshold**: According to [J. D’Souza and S. Auer](http://ceur-ws.org/Vol-2658/paper2.pdf) effort in designing NCG dataset, most of the research problems come from title, abstract and introduction part of the paper. However here, due to the variant in structure of papers it is hard to seprate these sections.
 
 We made an analysis of the research problem indexes distributions to find appropiate number of samples from each documents to be considered for research problem classification. Here index is the no. of sentence that appeared in the paper to be research problem. 
 
@@ -108,29 +107,68 @@ The Figure-2 shows the distribution of research problem indexes in train and tes
 
 At the end, we obtained a very good shaped dataset for our classification task. The stats for the dataset is presented in `Table-1`. We reduced **train set by 82%** and **test set by 79%**. During the data reduction we only lost 2 samples in test set, however our models can be trained appropiately. The created datasets stored in `dataset/preprocessed/experiment-data` directory.
 
-
 #### 3.2 Research Problem Classifier
+The research problem sentence identification described as a text classification of the sentences into 0 or 1. Where we interested in category 1. It is highly imbalanced text classification problem. For this manner, we fine-tunned `distilroberta-base` over training data with learning rate of `2e-5`, batch size of `16`, and epoch number of `5`.
 
 #### 3.3 Research Problem Phrase Extraction
-
+After research problem sentence identification, the next step is to extract research problems. To do that we tack summarization approach. To build summarization model specific for this task we fine-tuned `T5-base` model over training data with learning rate of `2e-5`, batch size of `8`, and epoch number of `5`. In tokenization step of T5 text summarization, we used input text `max_length=1024` and summary `max_length=128`. During inference we applied output `max_length=10` for generating summaries.
 
 ## 4. Results
-### 4.1 Setups
 
-- Metrics:
-    - recall, precition, f1
-    - talk about recall importance in classification here and why and what is the major goal?
-- dataset
+#### 4.1 Setups
+**Metrics**: For whole system in NCG task a [scoring program](https://github.com/ncg-task/scoring-program) has been designed to calculate F1, precision, and recalls for Sentences, Information Units, and Triples. Here, since we only interested in one IU so results for triples will be the F1, precisin, and recall about research-problem IU. For text summarization, we used Rouge1, Rouge2, RougeL, and RougeLsum for manual evaluations.
+<!-- - talk about recall importance in classification here and why and what is the major goal? -->
+<!-- **Trainings**:  -->
+**Baseline Model**: For comparision of proposed method, we made a simpleset model for the task called `xgboost-t5small`. This model uses TFIDF features and XGBoost Classifier for research problem sentence identification, and T5-Small for text summarizations. According to the analysis we found XGBoost is performing better than other classifiers with TFIDF features.
 
 
-### 4.2 Evaluation
+#### 4.2 Experimental Evaluations
+The Table-2 presents the experimental evaluations over test sets. The `research problem classification` results are averaged macro scores. According to the these results, even fine-tuning a transformer model in a simplest way is performing quite well on this task. However, we may believe the data reduction technique effect as well. 
+For `research problem phrase extraction`, T5 models are quite appropiate choice here since fine-tuning different version of this models in a simplest way without any hyperparamether tuning is giving very promising results. 
+<table style='text-align:center;'>
+  <tr>
+    <td> <b>Task</b> </td>
+    <td colspan="3"><b>Research Problem Classifcation</b></td>
+    <td colspan="4"><b>Research Problem Phrase Extraction</b></td>
+  </tr>
+  <tr>
+    <td><i> Metrics </i></td>
+    <td colspan="1">F1</td>
+    <td colspan="1">P</td>
+    <td colspan="1">R</td>
+    <td colspan="1">Rouge1</td>
+    <td colspan="1">Rouge2</td>
+    <td colspan="1">RougeL</td>
+    <td colspan="1">RougheLsum</td>
+  </tr>
+  <tr>
+    <td>xgboost-t5small</td>
+    <td colspan="1">0.63</td>
+    <td colspan="1">0.78</td>
+    <td colspan="1">0.59</td>
+    <td colspan="1">75.12</td>
+    <td colspan="1">55.04</td>
+    <td colspan="1">64.86</td>
+    <td colspan="1">64.86</td>
+  </tr>
+  <tr>
+  <td>distilroberta-t5base</td>
+     <td colspan="1">0.75</td>
+    <td colspan="1">0.77</td>
+    <td colspan="1">0.74 </td>
+    <td colspan="1">79.56</td>
+    <td colspan="1">62.95</td>
+    <td colspan="1">71.42</td>
+    <td colspan="1">71.42</td>
+  </tr>
+</table>
+<b style='text-align:center;'>Table 2: Experimental Evaluations</b>
 
-* https://github.com/ncg-task/scoring-program
+In conclution, we can see that `distilroberta-t5base` models is good regarding the simplest model. So introducing more complexity on this simple model may allow us to boost the current model performance.
 
-- clf eval
-- ie eval
-- whole system eval
 
+
+#### 4.3 Final Evaluations
 
 
 <table style='text-align:center;'>
@@ -181,16 +219,36 @@ At the end, we obtained a very good shaped dataset for our classification task. 
     <td colspan="1">0.597</td>
   </tr>
 </table>
+<b style='text-align:center;'>Table 3: Final Evaluations - NCG Task Metrics</b>
+
+
+##### Main Quantitative Findings: 
+Table-2 presents the final results on the test set using NCG task metrics. The main quantitative findings are:
+1. The proposed method `distilroberta-t5base` achived averaged f1-score of **0.597** and defeet baseline model by large margin. The averaged F1-Score has been calculated as follows: $(F1_{sentences} + F1_{IU} + F1_{triples})/3$.
+2. IUs (research-problem) are being identified in 94% of the cases (the precentage is not representing the correctness of identified sentences as research problem)
+3. Research problems are now being identified in 52% of the cases which is two times higher than baseline model.
+4. The weekness of the system comes from triples, where we have still low F1 scores in baseline model. This weekness may solve by giving more attention to summarization module. Since, we didn't put much effort on hypterparameter tunnings.
+
+##### Quantitative Analysis:
+We have used experimentations on the test set to conclude the `distilroberta-base` model as a final system. The table 2 and table 3 shows experimental and final results. The quantitive analysis are presented as follows:
+
+1. The recall metric become important in sentence classification task since much we could get the possibility of extracting triples that represents the resarch-problems are high. However, the best model is still suffer from this prespective. But considering the baseline model, it is improved by 30% and it shows why summarization service was able to extract triples in double rate of baseline model (f1 score of 32%).
+
+2. The `xgboost-t5small` model shows that TFIDF features are not quite well for this task. The possible reason behind this is the high word correlations between research-problem and other sentences. Which it leads to poor feature quality for research-problem class.
+
+3. 
 
 
 ## 5. Oservations && Code Instructions
 
 ### 5.1 Observations
+1. Investigations showed that in few cases sentences with research-problem label repeated multiple times in papers, however these sentences didn't appear in the original contribution sentences. As an example, in `training-set/Passage_re-ranking/1` paper, first item of `info-units/resarch-problem.json` appeared once in title and one more time in the body of paper. But its sentence index appeared once in the `sentences.txt`
+2. For many of files in `info-units/research-problem.json` there is inconsistency in data structures which we solve this issue in building dataset by hard coding. As an example, in `training-set/natural-language-inference/`, papers `50`, `45`, and `14` have inconsistant data strcuture with other papers. This scenario repeated many times. For inconsistency, research-problems in these papers sould be inside of a list like others.
+3. In [scoring program](https://github.com/ncg-task/scoring-program) we saw that the evaluation is being done on two papers for each task only. we fix this by allowing the evaluation go through all the papers. The following line in code has been changed from ```for i in range(2):``` to ```for i in range(len(os.listdir(os.path.join(gold_dir, task)))):```
+
 ### 5.2 Code Instructions
 
-
-
-
+<!-- 
 ## 6. Future works
 - Using title, abstract, and introductions only
 - Classifier: Transformers 
@@ -199,19 +257,19 @@ At the end, we obtained a very good shaped dataset for our classification task. 
 - IE: keyword extraction 
 - IE: topic modeling
 - IE: NER *
-- IE: summarization 
+- IE: summarization  -->
 
 
-## Requirenments
+### Requirenments
+* Python3
+* Packages in requirenments.txt
 
 
-
-### References
+<!-- ### References
 https://zenodo.org/record/1157185#.Yr4JZ9JBzeQ
 http://ceur-ws.org/Vol-2658/paper2.pdf
-
 1. https://ncg-task.github.io/
 2. https://github.com/ncg-task
 3. https://github.com/ncg-task/training-data
 4. https://github.com/ncg-task/test-data
-5. https://github.com/ncg-task/sample-submission
+5. https://github.com/ncg-task/sample-submission -->
